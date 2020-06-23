@@ -1,0 +1,30 @@
+package com.july.demo.adpter.outbound;
+
+import com.july.demo.application.port.outbound.UserRepository;
+import com.july.demo.domain.Jid;
+import com.july.demo.domain.User;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+import java.util.List;
+
+public interface JpaUserRepository  extends UserRepository,JpaRepository<User, Jid> {
+    List<User> findByEmailAndPassword(String email, String password);
+
+    @Override
+    default String register(User user){
+        this.save(user);
+        return user.getId().toString();
+    }
+
+    @Override
+    default String login(String email,String password){
+        List<User> list=findByEmailAndPassword(email,password);
+        if(list.size()>0){
+            return list.get(0).getId().toString();
+        }
+        return "";
+
+    }
+
+
+}

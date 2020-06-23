@@ -1,0 +1,21 @@
+#获取所有评审专家所有信息接口
+GET http://localhost:8080/expert/getallexpert
+
+###
+#添加评审专家信息
+POST http://localhost:8080/expert/addexpert
+
+###
+#删除评审专家信息
+DELETE http://localhost:8080/expert/deleteexpertbyid
+
+###
+#修改评审专家信息
+PUT http://localhost:8080/expert/updateexpertbyid
+
+###
+#按id查找评审专家信息
+GET http://localhost:8080/expert/getexpertbyid
+
+#http://localhost:8080/*/get*
+#*代表的是哪个模块，比如专家，就是expert，用户就是user和数据库匹配的
