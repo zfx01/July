@@ -1,6 +1,7 @@
 package com.july.demo.adpter.outbound;
 
 import com.july.demo.application.port.outbound.UserRepository;
+import com.july.demo.domain.Expert;
 import com.july.demo.domain.Jid;
 import com.july.demo.domain.User;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -24,6 +25,35 @@ public interface JpaUserRepository  extends UserRepository,JpaRepository<User, J
         }
         return "";
 
+    }
+
+    @Override
+    default String deletebyid(Jid id){
+        this.deleteById(id);
+        return id.getValue();
+    }
+
+    @Override
+    default String add(User user){
+        this.save(user);
+        return user.getId().getValue();
+    }
+
+    @Override
+    default List<User> findall (){
+        return this.findAll();
+    }
+
+    @Override
+    default User findbyid(Jid id){
+        return this.findById(id).get();
+    }
+
+    @Override
+    default String updatebyid(Jid id,User user){
+        user.setId(id);
+        this.save(user);
+        return id.getValue();
     }
 
 

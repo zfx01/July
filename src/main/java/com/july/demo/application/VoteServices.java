@@ -1,9 +1,9 @@
 package com.july.demo.application;
 
-import com.july.demo.application.port.inbound.ExpertUsecase;
-import com.july.demo.application.port.outbound.ExpertRepository;
-import com.july.demo.domain.Expert;
+import com.july.demo.application.port.inbound.VoteUsecase;
+import com.july.demo.application.port.outbound.VoteRepository;
 import com.july.demo.domain.Jid;
+import com.july.demo.domain.Vote;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -11,18 +11,18 @@ import java.util.List;
 
 
 @Service
-public class ExpertServices implements ExpertUsecase {
+public class VoteServices implements VoteUsecase {
 
     @Autowired
-    ExpertRepository repository;
+    VoteRepository repository;
 
     @Override
-    public List<Expert> getall() {
+    public List<Vote> getall() {
         return repository.findall();
     }
 
     @Override
-    public Expert findByid(String id) {
+    public Vote findByid(String id) {
         return repository.findbyid(new Jid().of(id));
     }
 
@@ -32,12 +32,12 @@ public class ExpertServices implements ExpertUsecase {
     }
 
     @Override
-    public String add(Expert expert) {
-        return repository.add(expert);
+    public String add(Vote vote) {
+        return repository.add(vote);
     }
 
     @Override
-    public String update(String id, Expert expert) {
-        return repository.updatebyid(new Jid().of(id),expert);
+    public String update(String id, Vote vote) {
+        return repository.updatebyid(new Jid().of(id),vote);
     }
 }

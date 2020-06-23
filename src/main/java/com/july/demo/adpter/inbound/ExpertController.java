@@ -18,7 +18,7 @@ public class ExpertController {
 
     @GetMapping("getallexpert")
     public List<Expert> getallexpert(){
-        return usecase.getallexpert();
+        return usecase.getall();
     }
 
     @PostMapping("addexpert")

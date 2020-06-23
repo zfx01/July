@@ -1,22 +1,20 @@
 package com.july.demo.application.port.outbound;
 
-import com.july.demo.domain.Expert;
+import com.july.demo.domain.Accessory;
 import com.july.demo.domain.Jid;
 import com.july.demo.domain.User;
+import com.july.demo.domain.Vote;
 
 import java.util.List;
 
-public interface UserRepository{
+public interface AccessoryRepository {
 
-    String register(User user);
 
-    String login(String email, String password);
-
-    String add(User user);
+    String add(Accessory accessory);
 
     String deletebyid(Jid id);
 
-    String updatebyid(Jid id,User user);
+    String updatebyid(Jid id, Accessory accessory);
 
     User findbyid(Jid id);
 

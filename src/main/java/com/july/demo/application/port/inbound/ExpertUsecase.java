@@ -8,7 +8,7 @@ import java.util.List;
 @Component
 public interface ExpertUsecase {
 
-    List<Expert> getallexpert();
+    List<Expert> getall();
 
     Expert findByid(String id);
 
