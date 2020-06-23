@@ -8,9 +8,6 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import java.util.List;
 
 public interface JpaAccessoryRepository extends AccessoryRepository,JpaRepository<Accessory, Jid> {
-    List<Accessory> findByEmailAndPassword(String email, String password);
-
-
 
     @Override
     default String deletebyid(Jid id){

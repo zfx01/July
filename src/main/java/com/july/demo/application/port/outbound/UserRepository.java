@@ -3,9 +3,10 @@ package com.july.demo.application.port.outbound;
 import com.july.demo.domain.Expert;
 import com.july.demo.domain.Jid;
 import com.july.demo.domain.User;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public interface UserRepository{
 
     String register(User user);

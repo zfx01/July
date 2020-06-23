@@ -2,9 +2,10 @@ package com.july.demo.application.port.outbound;
 
 import com.july.demo.domain.Declaration;
 import com.july.demo.domain.Jid;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public interface DeclarationRepository {
 
 

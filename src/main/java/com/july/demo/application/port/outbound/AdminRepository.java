@@ -4,9 +4,10 @@ import com.july.demo.domain.Admin;
 import com.july.demo.domain.Jid;
 import com.july.demo.domain.User;
 import com.july.demo.domain.Vote;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
-
+@Component
 public interface AdminRepository {
 
 
