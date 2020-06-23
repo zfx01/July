@@ -1,42 +1,45 @@
 package com.july.demo.adpter.inbound;
 
-import com.july.demo.application.port.inbound.UserUsecase;
-import com.july.demo.domain.User;
+import com.july.demo.application.port.inbound.AccessoryUsecase;
+import com.july.demo.application.port.inbound.AccessoryUsecase;
+import com.july.demo.domain.Accessory;
+import com.july.demo.domain.Accessory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.persistence.Access;
 import java.util.List;
 
 @RestController
-@RequestMapping("/User")
+@RequestMapping("/Accessory")
 @CrossOrigin("*")
 public class AccessoryController {
 
     @Autowired
-    UserUsecase usecase;
+    AccessoryUsecase usecase;
 
-    @GetMapping("getalluser")
-    public List<User> getallUser(){
+    @GetMapping("getallaccessory")
+    public List<Accessory> getallAccessory(){
         return usecase.getall();
     }
 
-    @PostMapping("adduser")
-    public String addUser(User user){
-        return usecase.add(user);
+    @PostMapping("addaccessory")
+    public String addAccessory(Accessory accessory){
+        return usecase.add(accessory);
     }
 
-    @GetMapping("getUserbyid")
-    public User findByid(String id){
+    @GetMapping("getAccessorybyid")
+    public Accessory findByid(String id){
         return usecase.findByid(id);
     }
 
-    @DeleteMapping("deleteUserbyid")
-    public String deleteUserbyid(String id){
+    @DeleteMapping("deleteAccessorybyid")
+    public String deleteAccessorybyid(String id){
         return usecase.deleteByid(id);
     }
 
-    @PutMapping("updateUserbyid")
-    public String updateUserbyid(String id,User user){
-        return usecase.update(id,user);
+    @PutMapping("updateAccessorybyid")
+    public String updateAccessorybyid(String id,Accessory accessory){
+        return usecase.update(id,accessory);
     }
 }

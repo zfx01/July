@@ -16,7 +16,7 @@ public interface AccessoryRepository {
 
     String updatebyid(Jid id, Accessory accessory);
 
-    User findbyid(Jid id);
+    Accessory findbyid(Jid id);
 
-    List<User> findall();
+    List<Accessory> findall();
 }

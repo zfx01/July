@@ -2,8 +2,6 @@ package com.july.demo.application.port.outbound;
 
 import com.july.demo.domain.Jid;
 import com.july.demo.domain.Projects;
-import com.july.demo.domain.User;
-import com.july.demo.domain.Vote;
 
 import java.util.List;
 
@@ -16,7 +14,7 @@ public interface ProjectRepository {
 
     String updatebyid(Jid id, Projects projects);
 
-    User findbyid(Jid id);
+    Projects findbyid(Jid id);
 
-    List<User> findall();
+    List<Projects> findall();
 }

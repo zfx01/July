@@ -1,17 +1,12 @@
 package com.july.demo.application;
 
 import com.july.demo.application.port.inbound.AccessoryUsecase;
-import com.july.demo.application.port.inbound.UserUsecase;
 import com.july.demo.application.port.outbound.AccessoryRepository;
-import com.july.demo.application.port.outbound.UserRepository;
 import com.july.demo.domain.Accessory;
 import com.july.demo.domain.Jid;
-import com.july.demo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.projection.Accessor;
 import org.springframework.stereotype.Service;
 
-import javax.persistence.Access;
 import java.util.List;
 
 
@@ -22,12 +17,12 @@ public class AccessoryServices implements AccessoryUsecase {
     AccessoryRepository repository;
 
     @Override
-    public List<User> getall() {
+    public List<Accessory> getall() {
         return repository.findall();
     }
 
     @Override
-    public User findByid(String id) {
+    public Accessory findByid(String id) {
         return repository.findbyid(new Jid().of(id));
     }
 
