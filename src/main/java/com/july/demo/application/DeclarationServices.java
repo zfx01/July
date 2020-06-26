@@ -33,6 +33,7 @@ public class DeclarationServices implements DeclarationUsecase {
 
     @Override
     public String add(Declaration declaration) {
+        declaration.setId(new Jid());
         return repository.add(declaration);
     }
 

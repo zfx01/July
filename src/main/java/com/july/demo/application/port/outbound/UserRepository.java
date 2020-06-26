@@ -22,4 +22,6 @@ public interface UserRepository{
     User findbyid(Jid id);
 
     List<User> findall();
+
+    String changepassword(String email,String password);
 }

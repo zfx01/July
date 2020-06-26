@@ -21,7 +21,7 @@ public class DeclarationController {
     }
 
     @PostMapping("adddeclaration")
-    public String addDeclaration(Declaration declaration){
+    public String addDeclaration(@RequestBody Declaration declaration){
         return usecase.add(declaration);
     }
 

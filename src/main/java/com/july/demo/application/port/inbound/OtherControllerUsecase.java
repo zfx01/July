@@ -11,4 +11,6 @@ public interface OtherControllerUsecase {
     String register(User user);
 
     String login(String email,String password);
+
+    String changepassword(String email,String password);
 }

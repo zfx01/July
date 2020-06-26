@@ -4,22 +4,29 @@ import com.july.demo.application.port.inbound.OtherControllerUsecase;
 import com.july.demo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
-import java.io.File;
-import java.io.FileNotFoundException;
-import java.io.IOException;
+import javax.servlet.http.HttpServletResponse;
+import java.io.*;
 
 @Controller
 @CrossOrigin("*")
 public class OtherController {
 
+    private String path=null;
+    {
+        try {
+            path = ResourceUtils.getURL("classpath:").getPath()+"static/Source/";
+        } catch (FileNotFoundException e) {
+            e.printStackTrace();
+        }
+    }
 
     @Autowired
     OtherControllerUsecase usecase;
-
 
     @GetMapping("register")
     public String register_page(){
@@ -45,7 +52,6 @@ public class OtherController {
         return "login";
     }
 
-
     @PostMapping("login")
     public String login(@RequestParam("email") String email,@RequestParam("password") String password ){
         System.out.println(email+password);
@@ -66,6 +72,87 @@ public class OtherController {
         return "face2";
     }
 
+    //下载文件
+    @ResponseBody
+    @RequestMapping("download")
+    private String downloadFile(HttpServletResponse response){
+        String downloadFilePath = null;
+        downloadFilePath = path+"test.docx";//被下载的文件在服务器中的路径,;
+        String fileName = "test.docx";//被下载文件的名称
+        File file = new File(downloadFilePath);
+        System.out.println(downloadFilePath);
+        if (file.exists()) {
+            response.setContentType("application/force-download");// 设置强制下载不打开            
+            response.addHeader("Content-Disposition", "attachment;fileName=" + fileName);
+            byte[] buffer = new byte[1024];
+            FileInputStream fis = null;
+            BufferedInputStream bis = null;
+            try {
+                fis = new FileInputStream(file);
+                bis = new BufferedInputStream(fis);
+                OutputStream outputStream = response.getOutputStream();
+                int i = bis.read(buffer);
+                while (i != -1) {
+                    outputStream.write(buffer, 0, i);
+                    i = bis.read(buffer);
+                }
+                return "下载成功";
+            } catch (Exception e) {
+                e.printStackTrace();
+            } finally {
+                if (bis != null) {
+                    try {
+                        bis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+                if (fis != null) {
+                    try {
+                        fis.close();
+                    } catch (IOException e) {
+                        e.printStackTrace();
+                    }
+                }
+            }
+        }
+        return "下载失败";
+
+    }
+
+    //上传文件
+
+    @ResponseBody
+    @RequestMapping("/upload")
+    public String upload(@RequestParam("file") MultipartFile file) {
+        try {
+            if (file.isEmpty()) {
+                return "文件为空";
+            }
+            // 获取文件名
+            String fileName = file.getOriginalFilename();
+            //log.info("上传的文件名为：" + fileName);
+            // 获取文件的后缀名
+            String suffixName = fileName.substring(fileName.lastIndexOf("."));
+            //log.info("文件的后缀名为：" + suffixName);
+            // 设置文件存储路径
+            path = path + fileName;
+            File dest = new File(path);
+            // 检测是否存在目录
+            if (!dest.getParentFile().exists()) {
+                dest.getParentFile().mkdirs();// 新建文件夹
+            }
+            file.transferTo(dest);// 文件写入
+            return "上传成功";
+        } catch (IllegalStateException e) {
+            e.printStackTrace();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return "上传失败";
+    }
+
+    //获取图片
     @PostMapping("getimage")
     public String getimage(HttpServletRequest req,@RequestParam String card,@RequestParam MultipartFile file){
         String destFileName="";
@@ -92,6 +179,17 @@ public class OtherController {
         System.out.println(destFileName);
         return "login";
     }
+
+    @GetMapping("findpassword")
+    public String findpassword(){
+        return "findpassword";
+    }
+
+    @PutMapping("findpassword")
+    public String findpasswordput(@RequestParam String password,@RequestParam String email){
+        return usecase.changepassword(email,password);
+    }
+
 
 
 }

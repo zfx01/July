@@ -2,6 +2,7 @@ package com.july.demo.application;
 
 import com.july.demo.adpter.outbound.JpaUserRepository;
 import com.july.demo.application.port.inbound.OtherControllerUsecase;
+import com.july.demo.application.port.outbound.UserRepository;
 import com.july.demo.domain.User;
 import com.july.demo.other.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ public class OtherServices implements OtherControllerUsecase {
 
     @Autowired
     JpaUserRepository repository;
+    UserRepository rep;
 
     public String getcode(String userto){
 //        String activationCode = MD5.getMd5(new Date().toLocaleString(),32);
@@ -34,5 +36,9 @@ public class OtherServices implements OtherControllerUsecase {
     @Override
     public String login(String email, String password) {
         return repository.login(email,password);
+    }
+
+    public String changepassword(String email,String password){
+        return rep.changepassword(email,password);
     }
 }
