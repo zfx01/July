@@ -33,6 +33,7 @@ public class ProjectServices implements ProjectUsecase {
 
     @Override
     public String add(Projects projects) {
+        projects.setId(new Jid());
         return repository.add(projects);
     }
 

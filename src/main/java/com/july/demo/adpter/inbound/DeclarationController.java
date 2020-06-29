@@ -4,6 +4,7 @@ import com.july.demo.application.port.inbound.DeclarationUsecase;
 import com.july.demo.domain.Declaration;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import java.util.List;
 
@@ -21,7 +22,7 @@ public class DeclarationController {
     }
 
     @PostMapping("adddeclaration")
-    public String addDeclaration(@RequestBody Declaration declaration){
+    public String addDeclaration(@RequestBody Declaration declaration,@RequestParam("file") MultipartFile file ){
         return usecase.add(declaration);
     }
 

@@ -1,9 +1,12 @@
 package com.july.demo.adpter.inbound;
 
-import com.july.demo.application.port.inbound.OtherControllerUsecase;
+import com.july.demo.application.port.inbound.*;
+import com.july.demo.domain.Declaration;
 import com.july.demo.domain.User;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.boot.autoconfigure.web.servlet.ConditionalOnMissingFilterBean;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
@@ -11,6 +14,8 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.*;
+import java.util.ArrayList;
+import java.util.List;
 
 @Controller
 @CrossOrigin("*")
@@ -27,6 +32,27 @@ public class OtherController {
 
     @Autowired
     OtherControllerUsecase usecase;
+    @Autowired
+    AccessoryUsecase accessory;
+    @Autowired
+    AdminUsecase admin;
+    @Autowired
+    CommentUsecase comment;
+    @Autowired
+    DeclarationUsecase declaration;
+    @Autowired
+    ExpertUsecase expert;
+    @Autowired
+    ProjectUsecase project;
+    @Autowired
+    UserUsecase user;
+    @Autowired
+    VoteUsecase vote;
+    @Autowired
+    AwardUsecase award;
+    @Autowired
+    NoticeUsecase notice;
+
 
     @GetMapping("register")
     public String register_page(){
@@ -190,6 +216,55 @@ public class OtherController {
         return usecase.changepassword(email,password);
     }
 
+    @GetMapping("index")
+    public String index(){
+        return "index/index";
+    }
 
+    @GetMapping("back")
+    public String back(){
+        return "back/index";
+    }
+
+    @GetMapping("getpage")
+    public String getpage(@RequestParam String page,Model model){
+        String data;
+        List list=new ArrayList();
+        switch (page){
+            case "user":
+               list=user.getall();
+               break;
+            case "accessory":
+                list=accessory.getall();
+                break;
+            case "admin":
+                list=admin.getall();
+                break;
+            case "award":
+                list=award.getall();
+                break;
+            case "comment":
+                list=comment.getall();
+                break;
+            case "declaration":
+                list=declaration.getall();
+                break;
+            case "expert":
+                list=expert.getall();
+                break;
+            case "project":
+                list=project.getall();
+                break;
+            case "vote":
+                list=vote.getall();
+                break;
+            case "notice":
+                list=notice.getall();
+                break;
+        }
+
+       model.addAttribute("datas",list);
+        return "back/"+page;
+    }
 
 }

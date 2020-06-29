@@ -4,9 +4,7 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.EmbeddedId;
-import javax.persistence.Entity;
-import javax.persistence.Table;
+import javax.persistence.*;
 
 @Entity
 @Data
@@ -20,5 +18,11 @@ public class Projects {
     String ower;
     String detail;
     String belongto;
+    String accessoryid;
+    String isnew;
+    String isfinish;
+    String otherdetail;
+    @OneToOne
+    Member member;
 
 }

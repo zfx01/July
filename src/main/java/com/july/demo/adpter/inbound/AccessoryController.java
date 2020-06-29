@@ -6,6 +6,7 @@ import com.july.demo.domain.Accessory;
 import com.july.demo.domain.Accessory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.Access;
 import java.util.List;
@@ -21,6 +22,11 @@ public class AccessoryController {
     @GetMapping("getallaccessory")
     public List<Accessory> getallAccessory(){
         return usecase.getall();
+    }
+
+    @PostMapping("upload")
+    public String upload(@RequestParam("file") MultipartFile file){
+        return file.getOriginalFilename();
     }
 
     @PostMapping("addaccessory")

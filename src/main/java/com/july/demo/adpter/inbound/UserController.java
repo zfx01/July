@@ -32,7 +32,7 @@ public class UserController {
     }
 
     @DeleteMapping("deleteUserbyid")
-    public String deleteUserbyid(String id){
+    public String deleteUserbyid(@RequestParam  String id){
         return usecase.deleteByid(id);
     }
 

@@ -1,10 +1,13 @@
 package com.july.demo.adpter.inbound;
 
 import com.july.demo.application.port.inbound.ProjectUsecase;
+import com.july.demo.domain.Member;
 import com.july.demo.domain.Projects;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -21,7 +24,12 @@ public class ProjectController {
     }
 
     @PostMapping("addproject")
-    public String addProject(Projects project){
+    public String addProject(@RequestBody Projects project, HttpServletRequest request, @RequestParam("file") MultipartFile file){
+        String m1=request.getParameter("member1");
+        String m2=request.getParameter("member2");
+        String m3=request.getParameter("member3");
+        String m4=request.getParameter("member4");
+        project.setMember(new Member(m1,m2,m3,m4,project.getOwer()));
         return usecase.add(project);
     }
 
