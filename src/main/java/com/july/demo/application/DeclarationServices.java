@@ -41,4 +41,9 @@ public class DeclarationServices implements DeclarationUsecase {
     public String update(String id, Declaration declaration) {
         return repository.updatebyid(new Jid().of(id),declaration);
     }
+
+    @Override
+    public List<Declaration> findByawardid(String awardid) {
+        return repository.findByawardid(awardid);
+    }
 }

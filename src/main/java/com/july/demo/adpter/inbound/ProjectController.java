@@ -4,13 +4,15 @@ import com.july.demo.application.port.inbound.ProjectUsecase;
 import com.july.demo.domain.Member;
 import com.july.demo.domain.Projects;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
-@RestController
+@Controller
 @RequestMapping("/Project")
 @CrossOrigin("*")
 public class ProjectController {
@@ -19,11 +21,13 @@ public class ProjectController {
     ProjectUsecase usecase;
 
     @GetMapping("getallproject")
+    @ResponseBody
     public List<Projects> getallProject(){
         return usecase.getall();
     }
 
     @PostMapping("addproject")
+    @ResponseBody
     public String addProject(@RequestBody Projects project, HttpServletRequest request, @RequestParam("file") MultipartFile file){
         String m1=request.getParameter("member1");
         String m2=request.getParameter("member2");
@@ -34,17 +38,27 @@ public class ProjectController {
     }
 
     @GetMapping("getProjectbyid")
+    @ResponseBody
     public Projects findByid(String id){
         return usecase.findByid(id);
     }
 
     @DeleteMapping("deleteProjectbyid")
+    @ResponseBody
     public String deleteProjectbyid(String id){
         return usecase.deleteByid(id);
     }
 
     @PutMapping("updateProjectbyid")
+    @ResponseBody
     public String updateProjectbyid(String id,Projects project){
         return usecase.update(id,project);
+    }
+
+
+    @GetMapping("getproject")
+    public String getproject(Model model,@RequestParam String id){
+        model.addAttribute("obj",usecase.findByid(id));
+        return "lzy/review";
     }
 }

@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface JpaDeclarationRepository extends DeclarationRepository, JpaRepository<Declaration, Jid> {
 
+    List<Declaration> findByAwardid(String awardid);
+
     @Override
     default String deletebyid(Jid id){
         this.deleteById(id);
@@ -36,6 +38,11 @@ public interface JpaDeclarationRepository extends DeclarationRepository, JpaRepo
         declaration.setId(id);
         this.save(declaration);
         return id.getValue();
+    }
+
+    @Override
+    default List<Declaration> findByawardid(String awardid){
+        return this.findByAwardid(awardid);
     }
 
 

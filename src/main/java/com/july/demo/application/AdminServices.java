@@ -7,6 +7,7 @@ import com.july.demo.domain.Jid;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.swing.*;
 import java.util.List;
 
 
@@ -33,11 +34,17 @@ public class AdminServices implements AdminUsecase {
 
     @Override
     public String add(Admin admin) {
+        admin.setId(new Jid());
         return repository.add(admin);
     }
 
     @Override
     public String update(String id, Admin admin) {
         return repository.updatebyid(new Jid().of(id),admin);
+    }
+
+    @Override
+    public List<Admin> findUsernameAndPassword(String username, String password){
+        return repository.findByUsernameAndpassword(username,password);
     }
 }

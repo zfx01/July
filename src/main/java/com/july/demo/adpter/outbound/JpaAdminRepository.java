@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface JpaAdminRepository extends AdminRepository, JpaRepository<Admin, Jid> {
 
+    List<Admin> findByUsernameAndPassword(String username,String password);
+
+
     @Override
     default String deletebyid(Jid id){
         this.deleteById(id);
@@ -36,6 +39,12 @@ public interface JpaAdminRepository extends AdminRepository, JpaRepository<Admin
         admin.setId(id);
         this.save(admin);
         return id.getValue();
+    }
+
+
+    @Override
+    default List<Admin> findByUsernameAndpassword(String username,String password){
+        return this.findByUsernameAndPassword(username,password);
     }
 
 

@@ -21,7 +21,7 @@ public class AdminController {
     }
 
     @PostMapping("addadmin")
-    public String addAdmin(Admin admin){
+    public String addAdmin(@RequestBody Admin admin){
         return usecase.add(admin);
     }
 

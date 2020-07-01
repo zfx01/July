@@ -20,4 +20,6 @@ public interface AwardRepository {
     Award findbyid(Jid id);
 
     List<Award> findall();
+
+    List<Award> findbygroup(String groupid);
 }

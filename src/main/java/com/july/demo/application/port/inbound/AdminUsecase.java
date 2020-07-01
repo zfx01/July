@@ -18,4 +18,6 @@ public interface AdminUsecase {
     String add(Admin admin);
 
     String update(String id,Admin admin);
+
+    List<Admin> findUsernameAndPassword(String username, String password);
 }

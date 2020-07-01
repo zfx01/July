@@ -18,4 +18,6 @@ public interface DeclarationRepository {
     Declaration findbyid(Jid id);
 
     List<Declaration> findall();
+
+    List<Declaration> findByawardid(String awardid);
 }

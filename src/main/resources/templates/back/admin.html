@@ -79,6 +79,32 @@
 			$("#submitForm").attr("action", "/xngzf/archives/exportExcelFangyuan.action").submit();	
 		}
 	}
+	// function update() {
+	// 	$.ajax({
+	// 		type:"get",
+	// 		url: "getedit",
+	// 		success(res) {
+	//
+	// 			location.href="getpage?page=admin_edit"
+	// 		}
+	// 	})
+	// }
+
+	function update(fyID) {
+		if(fyID!=null){
+		$.ajax({
+			url:"/sessionid?id="+fyID,
+			type:"GET",
+			success(res) {
+				// window.location.href="getpage?page=admin_edit"
+
+			}
+		})
+			$(location).attr('href', "getpage?page=admin_edit");
+		}else {
+			$(location).attr('href', "getpage?page=admin_edit");
+		}
+	}
 	
 	/** 删除 **/
 	function del(fyID){
@@ -172,7 +198,7 @@
 						
 						<div id="box_bottom">
 							<input type="button" value="查询" class="ui_input_btn01" onclick="search();" /> 
-							<input type="button" value="新增" class="ui_input_btn01" id="addBtn" /> 
+							<input type="button" value="新增" class="ui_input_btn01" onclick="update(null)" />
 							<input type="button" value="删除" class="ui_input_btn01" onclick="batchDel();" /> 
 							<input type="button" value="导入" class="ui_input_btn01" id="importBtn" />
 							<input type="button" value="导出" class="ui_input_btn01" onclick="exportExcel();" />
@@ -198,7 +224,7 @@
 							<th th:text="${data.password}"></th>
 							<th th:text="${data.rights}"></th>
 							<td>
-								<a href="house_edit.html?fyID=14458579642011" class="edit">编辑</a>
+								<a th:onclick="update([[${data.id.value}]])" class="edit">编辑</a>
 								<a th:onclick="del([[${data.id.value}]])">删除</a>
 							</td>
 						</tr>

@@ -40,4 +40,9 @@ public class ExpertServices implements ExpertUsecase {
     public String update(String id, Expert expert) {
         return repository.updatebyid(new Jid().of(id),expert);
     }
+
+    @Override
+    public List<Expert> findUsernameAndPassword(String email, String password) {
+        return repository.findUsernameAndpassword(email,password);
+    }
 }

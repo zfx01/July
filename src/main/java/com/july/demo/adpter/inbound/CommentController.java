@@ -5,6 +5,7 @@ import com.july.demo.domain.Comment;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @RestController
@@ -21,8 +22,8 @@ public class CommentController {
     }
 
     @PostMapping("addcomment")
-    public String addComment(Comment comment){
-        return usecase.add(comment);
+    public String addComment(@RequestBody Comment comment, HttpServletRequest request){
+        return usecase.add(comment,request);
     }
 
     @GetMapping("getCommentbyid")

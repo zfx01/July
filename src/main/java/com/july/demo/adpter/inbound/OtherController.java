@@ -1,10 +1,10 @@
 package com.july.demo.adpter.inbound;
 
 import com.july.demo.application.port.inbound.*;
-import com.july.demo.domain.Declaration;
-import com.july.demo.domain.User;
+import com.july.demo.domain.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.servlet.ConditionalOnMissingFilterBean;
+import org.springframework.boot.web.servlet.server.Session;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.util.ResourceUtils;
@@ -13,6 +13,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
+import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
@@ -53,6 +54,17 @@ public class OtherController {
     @Autowired
     NoticeUsecase notice;
 
+    @GetMapping("page")
+    public String page(@RequestParam String page){
+        return page;
+    }
+
+    @GetMapping("page_review")
+    public String page_id(Model model,@RequestParam String id,@RequestParam String page){
+        model.addAttribute("id",id);
+        model.addAttribute("data",project.findByid(id));
+        return page;
+    }
 
     @GetMapping("register")
     public String register_page(){
@@ -79,13 +91,55 @@ public class OtherController {
     }
 
     @PostMapping("login")
-    public String login(@RequestParam("email") String email,@RequestParam("password") String password ){
+    public String login(HttpServletRequest request,Model model,@RequestParam("email") String email,@RequestParam("password") String password ){
         System.out.println(email+password);
-        String id= usecase.login(email,password);
-        if(!id.equals(""))
-            return "index";
-        else
-            return "login";
+        HttpSession session= request.getSession();
+        String id,username;
+        try {
+            Admin admins= admin.findUsernameAndPassword(email,password).get(0);
+            id=admins.getId().getValue();
+            username=admins.getUsername();
+            model.addAttribute("username",username);
+            model.addAttribute("id",id);
+            model.addAttribute("role","root");
+            session.setAttribute("username",username);
+            session.setAttribute("id",id);
+            if(!id.equals(""))
+                return "index/index";
+            else
+                return "login";
+        }catch (Exception e){}
+
+        try {
+            id= usecase.login(email,password);
+            username= user.findByid(id).getUsername();
+            model.addAttribute("username",username);
+            model.addAttribute("id",id);
+            model.addAttribute("role","user");
+            session.setAttribute("username",username);
+            session.setAttribute("id",id);
+            if(!id.equals(""))
+                return "index/index";
+            else
+                return "login";
+        }catch (Exception e){}
+
+        try {
+            id= expert.findUsernameAndPassword(email,password).get(0).getId().getValue();
+            username= expert.findByid(id).getUsername();
+            model.addAttribute("username",username);
+            model.addAttribute("id",id);
+            model.addAttribute("role","expert");
+            session.setAttribute("username",username);
+            session.setAttribute("id",id);
+            if(!id.equals(""))
+                return "index/index";
+            else
+                return "login";
+        }catch (Exception e){}
+
+        return "login";
+
     }
 
     @RequestMapping("face")
@@ -266,5 +320,138 @@ public class OtherController {
        model.addAttribute("datas",list);
         return "back/"+page;
     }
+
+    @GetMapping("getrole")
+    public String getrole(@RequestParam  String id){
+        if (id=="")
+            return "login";
+        try {
+            admin.findByid(id);
+            return "back/index";
+        }catch (Exception e){
+
+        }
+        return "login";
+    }
+
+    @GetMapping("edit")
+    public String edit(@RequestParam String type,String id,Model model,HttpServletRequest request){
+        if(id!=null){
+        Object obj=null;
+        switch (type){
+            case "user":
+                obj=user.findByid(id);
+                break;
+            case "accessory":
+                obj=accessory.findByid(id);
+                break;
+            case "admin":
+                obj=admin.findByid(id);
+                break;
+            case "award":
+                obj=award.findByid(id);
+                break;
+            case "comment":
+                obj=comment.findByid(id);
+                break;
+            case "declaration":
+                obj=declaration.findByid(id);
+                break;
+            case "expert":
+                obj=expert.findByid(id);
+                break;
+            case "project":
+                obj=project.findByid(id);
+                break;
+            case "vote":
+                obj=vote.findByid(id);
+                break;
+            case "notice":
+                obj=notice.findByid(id);
+                break;
+        }
+        model.addAttribute("obj",obj);
+        request.setAttribute("obj",obj);
+        model.addAttribute("id",id);
+        }
+
+        return "back/"+type+"_edit";
+
+    }
+
+    @GetMapping("getedit")
+    public  String getedit(){
+        return "back/admin_edit";
+    }
+
+    @GetMapping("expert_index")
+    public String expert_index(Model model,String id){
+        Expert expert_e=expert.findByid(id);
+        String expertid=expert_e.getGroup();
+        List<Award> list= award.findBygroup(expertid);
+        List<Declaration> list1=new ArrayList<Declaration>();
+        List<Projects> list2=new ArrayList<Projects>();
+
+        for(int i=0;i<list.size();i++){
+            list1.addAll(declaration.findByawardid(list.get(i).getId().getValue()));
+        }
+        for(int j=0;j<list1.size();j++){
+            list2.add(project.findByid(list1.get(0).getProjectid()));
+        }
+
+        model.addAttribute("datas",list2);
+        return "lzy/projects";
+    }
+
+    @GetMapping("review")
+    public String review(@RequestParam String id,Model model){
+        model.addAttribute("id",id);
+        model.addAttribute("data",project.findByid(id));
+        return "lzy/review";
+    }
+
+    @GetMapping("sessionid")
+    public void session(HttpServletRequest request,@RequestParam String id){
+        request.getSession().setAttribute("id",id);
+    }
+
+//    @GetMapping("obj_id")
+//    public Object obj_id(String id,){
+//        Object obj=null;
+//        switch (type){
+//            case "user":
+//                obj=user.findByid(id);
+//                break;
+//            case "accessory":
+//                obj=accessory.findByid(id);
+//                break;
+//            case "admin":
+//                obj=admin.findByid(id);
+//                break;
+//            case "award":
+//                obj=award.findByid(id);
+//                break;
+//            case "comment":
+//                obj=comment.findByid(id);
+//                break;
+//            case "declaration":
+//                obj=declaration.findByid(id);
+//                break;
+//            case "expert":
+//                obj=expert.findByid(id);
+//                break;
+//            case "project":
+//                obj=project.findByid(id);
+//                break;
+//            case "vote":
+//                obj=vote.findByid(id);
+//                break;
+//            case "notice":
+//                obj=notice.findByid(id);
+//                break;
+//        }
+//        model.addAttribute("obj",obj);
+//    }
+
 
 }

@@ -40,4 +40,6 @@ public class UserController {
     public String updateUserbyid(String id,User user){
         return usecase.update(id,user);
     }
+
+
 }

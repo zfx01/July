@@ -20,4 +20,5 @@ public class Comment {
     String info;
     Date time;
     String projectid;
+    String vote;
 }

@@ -39,4 +39,9 @@ public class AwardController {
     public String updateAwardbyid(String id,Award award){
         return usecase.update(id,award);
     }
+
+    @GetMapping("getbygroup")
+    public List<Award> getbygroup(String expertgroupid){
+        return usecase.findBygroup(expertgroupid);
+    }
 }

@@ -17,4 +17,6 @@ public interface ExpertUsecase {
     String add(Expert expert);
 
     String update(String id,Expert expert);
+
+    List<Expert> findUsernameAndPassword(String email, String password);
 }

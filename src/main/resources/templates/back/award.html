@@ -79,6 +79,14 @@
 			$("#submitForm").attr("action", "/xngzf/archives/exportExcelFangyuan.action").submit();	
 		}
 	}
+	function update(fyID) {
+		$.ajax({
+			url:"/edit?type=award&id="+fyID,
+			type:"GET",
+			success(res) {
+			}
+		})
+	}
 	
 	/** 删除 **/
 	function del(fyID){
@@ -216,7 +224,7 @@
 								<td></td>
 
 								<td>
-									<a href="house_edit.html?fyID=14458579642011" class="edit">编辑</a>
+									<a th:onclick="update([[${data.id.value}]])" class="edit">编辑</a>
 									<a th:onclick="del([[${data.id.value}]])">删除</a>
 								</td>
 

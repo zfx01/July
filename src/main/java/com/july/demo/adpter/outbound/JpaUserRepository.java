@@ -23,7 +23,7 @@ public interface JpaUserRepository  extends UserRepository,JpaRepository<User, J
     default String login(String email,String password){
         List<User> list=findByEmailAndPassword(email,password);
         if(list.size()>0){
-            return list.get(0).getId().toString();
+            return list.get(0).getId().getValue().toString();
         }
         return "";
 

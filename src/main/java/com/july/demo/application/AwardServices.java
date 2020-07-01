@@ -40,4 +40,9 @@ public class AwardServices implements AwardUsecase {
     public String update(String id, Award award) {
         return repository.updatebyid(new Jid().of(id),award);
     }
+
+    @Override
+    public List<Award> findBygroup(String groupid){
+        return repository.findbygroup(groupid);
+    }
 }

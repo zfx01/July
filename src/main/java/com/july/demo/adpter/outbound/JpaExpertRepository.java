@@ -9,6 +9,9 @@ import java.util.List;
 
 public interface JpaExpertRepository extends ExpertRepository, JpaRepository<Expert, Jid> {
 
+    List<Expert> findByUsernameAndPassword(String username,String password);
+
+
     @Override
     default String deletebyid(Jid id){
         this.deleteById(id);
@@ -36,6 +39,11 @@ public interface JpaExpertRepository extends ExpertRepository, JpaRepository<Exp
         expert.setId(id);
         this.save(expert);
         return id.getValue();
+    }
+
+    @Override
+    default List<Expert> findUsernameAndpassword(String username,String password){
+        return this.findByUsernameAndPassword(username,password);
     }
 
 

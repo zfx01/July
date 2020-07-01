@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface JpaAwardRepository extends AwardRepository, JpaRepository<Award, Jid> {
 
+    List<Award> findByExpertgroup(String groupid);
+
     @Override
     default String deletebyid(Jid id){
         this.deleteById(id);
@@ -36,6 +38,11 @@ public interface JpaAwardRepository extends AwardRepository, JpaRepository<Award
         award.setId(id);
         this.save(award);
         return id.getValue();
+    }
+
+    @Override
+    default List<Award> findbygroup(String groupid){
+        return this.findByExpertgroup(groupid);
     }
 
 

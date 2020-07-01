@@ -19,4 +19,5 @@ public interface ExpertRepository {
 
     List<Expert> findall();
 
+    List<Expert> findUsernameAndpassword(String email, String password);
 }

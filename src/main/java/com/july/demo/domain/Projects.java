@@ -22,6 +22,7 @@ public class Projects {
     String isnew;
     String isfinish;
     String otherdetail;
+    String img;
     @OneToOne
     Member member;
 

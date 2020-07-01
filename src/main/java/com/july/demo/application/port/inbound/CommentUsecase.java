@@ -3,6 +3,7 @@ package com.july.demo.application.port.inbound;
 import com.july.demo.domain.Comment;
 import org.springframework.stereotype.Component;
 
+import javax.servlet.http.HttpServletRequest;
 import java.util.List;
 
 @Component
@@ -14,7 +15,7 @@ public interface CommentUsecase {
 
     String deleteByid(String id);
 
-    String add(Comment comment);
+    String add(Comment comment, HttpServletRequest request);
 
     String update(String id,Comment comment);
 }

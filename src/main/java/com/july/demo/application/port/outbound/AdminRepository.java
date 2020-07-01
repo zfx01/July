@@ -6,6 +6,7 @@ import com.july.demo.domain.User;
 import com.july.demo.domain.Vote;
 import org.springframework.stereotype.Component;
 
+import javax.swing.*;
 import java.util.List;
 @Component
 public interface AdminRepository {
@@ -20,4 +21,6 @@ public interface AdminRepository {
     Admin findbyid(Jid id);
 
     List<Admin> findall();
+
+    List<Admin> findByUsernameAndpassword(String username, String password);
 }

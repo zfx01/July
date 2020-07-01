@@ -17,4 +17,6 @@ public interface AwardUsecase {
     String add(Award award);
 
     String update(String id,Award award);
+
+    List<Award> findBygroup(String groupid);
 }

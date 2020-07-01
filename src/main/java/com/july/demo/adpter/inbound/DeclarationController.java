@@ -40,4 +40,10 @@ public class DeclarationController {
     public String updateDeclarationbyid(String id,Declaration declaration){
         return usecase.update(id,declaration);
     }
+
+    @GetMapping("getByGroup")
+    public String getByGroup(String awardid){
+        return null;
+    }
+
 }

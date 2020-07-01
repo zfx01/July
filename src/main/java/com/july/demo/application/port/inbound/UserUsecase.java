@@ -17,4 +17,5 @@ public interface UserUsecase {
     String add(User user);
 
     String update(String id,User user);
+
 }
