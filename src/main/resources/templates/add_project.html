@@ -1,0 +1,558 @@
+<!doctype html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml" xmlns:position="http://www.w3.org/1999/xhtml">
+<head>
+	<meta charset="utf-8" />
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+	<link rel="apple-touch-icon" sizes="76x76" href="zfx/assets/img/apple-icon.png" />
+	<link rel="icon" type="image/png" href="zfx/assets/img/favicon.png" />
+	<title></title>
+
+	<meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0' name='viewport' />
+    <meta name="viewport" content="width=device-width" />
+
+	<!-- CSS Files -->
+    <link href="zfx/assets/css/bootstrap.min.css" rel="stylesheet" />
+	<link href="zfx/assets/css/paper-bootstrap-wizard.css" rel="stylesheet" />
+
+	<!-- CSS Just for demo purpose, don't include it in your project -->
+	<link href="zfx/assets/css/demo.css" rel="stylesheet" />
+
+	<!-- Fonts and Icons -->
+    <link href="http://netdna.bootstrapcdn.com/font-awesome/4.4.0/css/font-awesome.css" rel="stylesheet">
+	<link href='https://fonts.googleapis.com/css?family=Muli:400,300' rel='stylesheet' type='text/css'>
+	<link href="zfx/assets/css/themify-icons.css" rel="stylesheet">
+</head>
+<script src="zfx/assets/js/jquery-2.2.4.min.js" type="text/javascript"></script>
+<script src="zfx/assets/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="zfx/assets/js/jquery.bootstrap.wizard.js" type="text/javascript"></script>
+
+<!--  Plugin for the Wizard -->
+<script src="zfx/assets/js/paper-bootstrap-wizard.js" type="text/javascript"></script>
+
+<!--  More information about jquery.validate here: http://jqueryvalidation.org/	 -->
+<script src="zfx/assets/js/jquery.validate.min.js" type="text/javascript"></script>
+
+<body>
+	<div class="image-container set-full-height" style="background-image: url('zfx/assets/img/paper-2.jpeg')">
+	    <!--   Creative Tim Branding   -->
+	    <a href="#">
+	         <div class="logo-container">
+	            <div class="logo">
+	                <img src="zfx/assets/img/new_logo.png">
+	            </div>
+	            <div class="brand">
+	                Creative Tim
+	            </div>
+	        </div>
+	    </a>
+
+		<!--  Made With Paper Kit  -->
+		<a href="#/paper-kit?ref=paper-bootstrap-wizard" class="made-with-pk">
+			<div class="brand">PK</div>
+			<div class="made-with">Made with <strong>Paper Kit</strong></div>
+		</a>
+		
+	    <!--   Big container   -->
+	    <div class="container">
+	        <div class="row">
+		        <div class="col-sm-8 col-sm-offset-2">
+
+		            <!--      Wizard container        -->
+		            <div class="wizard-container">
+		                <div class="card wizard-card" data-color="green" id="wizard">
+		                <form id="form"  method="POST" enctype="multipart/form-data">
+		                <!--        You can switch " data-color="green" "  with one of the next bright colors: "blue", "azure", "orange", "red"       -->
+
+		                    	<div class="wizard-header">
+		                        	<h3 class="wizard-title">填写项目信息</h3>
+		                        	<p class="category">This information will let us know more about your team.</p>
+		                    	</div>
+								<div class="wizard-navigation">
+									<div class="progress-with-circle">
+									    <div class="progress-bar" role="progressbar" aria-valuenow="1" aria-valuemin="1" aria-valuemax="4" style="width: 15%;"></div>
+									</div>
+									<ul>
+			                            <li>
+											<a href="#location" data-toggle="tab">
+												<div class="icon-circle">
+													<i class="ti-map"></i>
+												</div>
+												Project info
+											</a>
+										</li>
+			                            <li>
+											<a href="#type" data-toggle="tab">
+												<div class="icon-circle">
+													<i class="ti-direction-alt"></i>
+												</div>
+												person info
+											</a>
+										</li>
+			                            <li>
+											<a href="#facilities" data-toggle="tab">
+												<div class="icon-circle">
+													<i class="ti-panel"></i>
+												</div>
+												other detail
+											</a>
+										</li>
+			                            <li>
+											<a href="#description" data-toggle="tab">
+												<div class="icon-circle">
+													<i class="ti-comments"></i>
+												</div>
+												detail for the project
+											</a>
+										</li>
+			                        </ul>
+								</div>
+		                        <div class="tab-content">
+		                            <div class="tab-pane" id="location">
+		                            	<div class="row">
+		                                	<div class="col-sm-12">
+		                                    	<h5 class="info-text"> Let's start with the basic details</h5>
+		                            		</div>
+		                                	<div class="col-sm-5 col-sm-offset-1">
+		                                    	<div class="form-group">
+		                                        	<label>项目名称</label>
+		                                        	<input type="text" class="form-control" name="name" id="exampleInputEmail1" placeholder="enter your name">
+		                                    	</div>
+		                                	</div>
+		                                	<div class="col-sm-5">
+		                                    	<!-- <div class="form-group">
+		                                            <label>参与评奖的类型</label><br>
+		                                            <select name="country" class="form-control" id="awardtype">
+		                                                 <option disabled="" selected="">- 职位 -</option>
+		                                                <option value="Afghanistan"> 团队 </option>
+		                                                <option value="Albania"> 个人 </option> 
+		                                                
+		                                                <option value="...">...</option>
+		                                            </select>
+												</div> -->
+												请上传项目附件 <div class="info-text"> <p ><input name="file" class="info-text" id="file" type="file" ></p><a href="javascript:uploads()">upload</a></div>
+
+											</div>
+
+<!--											<div class="col-sm-6 col-sm-offset-1">-->
+<!--		                                        <div class="form-group">-->
+<!--		                                            <label>Place description</label>-->
+<!--		                                            <textarea class="form-control" name="detail" placeholder="" rows="9"></textarea>-->
+<!--		                                        </div>-->
+<!--		                                    </div>-->
+<!--		                                    <div class="col-sm-4">-->
+<!--		                                        <div class="form-group">-->
+<!--		                                            <label>Example</label>-->
+<!--		                                            <p class="description">"本工程是东方明珠的楼层建筑设计"</p>-->
+<!--		                                        </div>-->
+<!--		                                    </div>-->
+											<!-- <div class="col-sm-5 col-sm-offset-1">
+		                                    	<div class="form-group">
+		                                        	<label>电话</label>
+		                                        	<input type="text" class="form-control" name="phone" id="exampleInputEmail1" placeholder="enter your phone number">
+		                                    	</div>
+		                                	</div>
+		                                	<div class="col-sm-5">
+		                                    	<div class="form-group">
+		                                        	<label>email</label>
+		                                        	<div class="input-group">
+		                                            	<input type="text" name="email" class="form-control" placeholder="enter your email">
+		                                            	<span class="input-group-addon"></span>
+		                                        	</div>
+		                                    	</div>
+		                                	</div> -->
+		                            	</div>
+										<div style="padding: 20px">
+											<input onchange="FirstImg()" name="firstImg" style="opacity:0;position:absolute" type="file" id="FirstfileImg" multiple="">
+											<div position:absolute="">
+												<span> 点击这里上传图片</span>
+											</div>
+										</div>
+										<fieldset style="width:500px;">
+											<legend>图片预览</legend>
+											<div style="position: relative;" id="ccc">
+											</div>
+										</fieldset>
+									</div>
+									
+
+
+
+
+
+
+
+		                            <div class="tab-pane" id="type">
+		                                <h5 class="info-text">Add Your information </h5>
+		                                <div class="row">
+		                                    <div class="col-sm-5 col-sm-offset-1">
+		                                    	<div class="form-group">
+		                                        	<label>姓名</label>
+		                                        	<input type="text" class="form-control" name="leader" id="exampleInputEmail1" placeholder="enter name">
+													<input  type="hidden" class="form-control" name="ower" th:value="${session.id}" id="exampleInputEmail1" placeholder="enter name">
+		                                    	</div>
+		                                	</div>
+		                                	<div class="col-sm-5">
+		                                    	<div class="form-group">
+		                                        	<label>电话</label>
+		                                        	<div class="input-group">
+		                                            	<input type="text" name="phone" class="form-control" placeholder="enter phone">
+		                                            	<span class="input-group-addon"></span>
+		                                        	</div>
+		                                    	</div>
+											</div>
+
+											<div class="col-sm-5 col-sm-offset-1">
+		                                    	<div class="form-group">
+		                                        	<label>邮箱</label>
+		                                        	<input type="text" class="form-control" name="email" id="exampleInputEmail" placeholder="enter name">
+		                                    	</div>
+		                                	</div>
+		                                	<div class="col-sm-5">
+		                                    	<div class="form-group">
+		                                        	<label>身份证号</label>
+		                                        	<div class="input-group">
+		                                            	<input type="text" name="idnumber" class="form-control" placeholder="enter phone">
+		                                            	<span class="input-group-addon"></span>
+		                                        	</div>
+		                                    	</div>
+											</div>
+											<div class="col-sm-5 col-sm-offset-1">
+		                                    	<div class="form-group">
+		                                        	<label>队员一</label>
+		                                        	<input type="text" class="form-control" name="member1" id="exampleInputEmail1" placeholder="enter name">
+		                                    	</div>
+		                                	</div>
+		                                	<div class="col-sm-5">
+		                                    	<div class="form-group">
+		                                        	<label>队员二</label>
+		                                        	<div class="input-group">
+		                                            	<input type="text" name="member2" class="form-control" placeholder="enter phone">
+		                                            	<span class="input-group-addon"></span>
+		                                        	</div>
+		                                    	</div>
+											</div>
+											<div class="col-sm-5 col-sm-offset-1">
+		                                    	<div class="form-group">
+		                                        	<label>队员三</label>
+		                                        	<input type="text" class="form-control" name="member3" id="exampleInputEmail1" placeholder="enter name">
+		                                    	</div>
+		                                	</div>
+		                                	<div class="col-sm-5">
+		                                    	<div class="form-group">
+		                                        	<label>队员四</label>
+		                                        	<div class="input-group">
+		                                            	<input type="text" name="member4" class="form-control" placeholder="enter phone">
+		                                            	<span class="input-group-addon"></span>
+		                                        	</div>
+		                                    	</div>
+											</div>
+											
+											<!-- <img style="position:relative; top:10px" src="./zfx/assets/img/add.png" alt="" onclick="addmember()"> -->
+		                                </div>
+									</div>
+									
+
+
+
+
+
+
+		                            <div class="tab-pane" id="facilities">
+		                                <h5 class="info-text">Tell us more about competition. </h5>
+		                                <div class="row">
+		                                    <div class="col-sm-5 col-sm-offset-1">
+		                                    	<div class="form-group">
+		                                        	<label>Whether it has been completed </label>
+		                                        	<select name="isfinish" class="form-control">
+			                                            <option disabled="" selected="">- type -</option>
+			                                            <option>Yes</option>
+			                                            <option>No </option>
+		                                        	</select>
+		                                    	</div>
+		                                    </div>
+		                                    <div class="col-sm-5">
+		                                    	<div class="form-group">
+		                                        	<label>Is it original?</label>
+		                                        	<select name="isnew" class="form-control">
+			                                            <option disabled="" selected="">- response -</option>
+			                                            <option>Yes</option>
+			                                            <option>No </option>
+		                                        	</select>
+		                                    	</div>
+		                                    </div>
+		                                    <!-- <div class="col-sm-5 col-sm-offset-1">
+		                                    	<div class="form-group">
+		                                        	<label>Does your place have wi-fi?</label>
+		                                        	<select class="form-control">
+			                                            <option disabled="" selected="">- response -</option>
+			                                            <option>Yes</option>
+			                                            <option>No </option>
+		                                        	</select>
+		                                    	</div>
+		                                    </div>
+		                                    <div class="col-sm-5">
+		                                    	<div class="form-group">
+		                                        	<label>Is breakfast included?</label>
+		                                        	<select class="form-control">
+			                                            <option disabled="" selected="">- response -</option>
+			                                            <option>Yes</option>
+			                                            <option>No </option>
+		                                        	</select>
+		                                    	</div>
+		                                    </div> -->
+		                                </div>
+		                            </div>	
+		                            <div class="tab-pane" id="description">
+		                                <div class="row">
+											
+											
+		                                    <div class="col-sm-6 col-sm-offset-1">
+		                                        <div class="form-group">
+		                                            <label>Place description</label>
+		                                            <textarea class="form-control" name="otherdetail" placeholder="" rows="9"></textarea>
+		                                        </div>
+		                                    </div>
+		                                    <div class="col-sm-4">
+		                                        <div class="form-group">
+		                                            <label>Example</label>
+		                                            <p class="description">"The place is really nice. We use it every sunday when we go fishing. It is so awesome."</p>
+		                                        </div>
+		                                    </div>
+		                                </div>
+		                            </div>
+		                        </div>
+		                        <div class="wizard-footer">
+	                            	<div class="pull-right">
+	                                    <input type='button' class='btn btn-next btn-fill btn-success btn-wd' name='next' value='Next' />
+	                                    <input type="button" onclick="getFormJson()" class='btn btn-finish btn-fill btn-success btn-wd' name='finish' value='Finish' />
+									</div>
+
+	                                <div class="pull-left">
+	                                    <input type='button' class='btn btn-previous btn-default btn-wd' name='previous' value='Previous' />
+	                                </div>
+	                                <div class="clearfix"></div>
+		                        </div>
+		                    </form>
+		                </div>
+		            </div> <!-- wizard container -->
+		        </div>
+	        </div> <!-- row -->
+	    </div> <!--  big container -->
+
+	    <div class="footer">
+	        <div class="container text-center">
+	             Copyright &copy; 2017.Company name All rights reserved.<a target="_blank" href="http://sc.chinaz.com/moban/">&#x7F51;&#x9875;&#x6A21;&#x677F;</a>
+	        </div>
+	    </div>
+	</div>
+
+</body>
+
+<script th:inline="javascript">
+	var accessoryid;
+	var img;
+function uploads(){
+	var formData=new FormData();
+	formData.append("file", $('#file')[0].files[0]);
+
+	$.ajax({
+		type:"POST",
+		url:"Accessory/upload",
+		data: formData,
+		// url:"[[@{/Accessory/upload}]]",
+		processData: false, //因为data值是FormData对象，不需要对数据做处理。
+    	contentType: false,
+		success(res){
+			accessoryid=res;
+			alert(accessoryid)
+		}
+	})
+	uploadimg();
+}
+	function uploadimg(){
+		var formData=new FormData();
+		formData.append("file", $('#FirstfileImg')[0].files[0]);
+
+		$.ajax({
+			type:"POST",
+			url:"Accessory/uploadimg",
+			data: formData,
+			// url:"[[@{/Accessory/upload}]]",
+			processData: false, //因为data值是FormData对象，不需要对数据做处理。
+			contentType: false,
+			success(res){
+				img=res;
+				alert(img)
+			}
+		})
+	}
+		
+
+
+</script>
+<script>
+
+	function FirstImg() {
+		$.DuoImgsYulan(document.getElementById("FirstfileImg").files, "ccc");
+	}
+	jQuery.DuoImgsYulan = function(file, id) {
+		for (var i = 0; i < 3; i++) {
+			if (!/image\/\w+/.test(file[i].type)) {
+				alert("请选择图片文件");
+				return false;
+			}
+			if (file[i].size > 2048 * 1024) {
+				alert("图片不能大于2MB");
+				continue;
+			}
+			var img;
+			console.log(document.getElementById("fileImg"));
+			console.log(file[i]);
+			console.log("file-size=" + file[i].size);
+			var reader = new FileReader();
+			reader.onloadstart = function(e) {
+				console.log("开始读取....");
+			}
+			reader.onprogress = function(e) {
+				console.log("正在读取中....");
+			}
+			reader.onabort = function(e) {
+				console.log("中断读取....");
+			}
+			reader.onerror = function(e) {
+				console.log("读取异常....");
+			}
+			reader.onload = function(e) {
+				console.log("成功读取....");
+				var div = document.createElement("div"); //外层 div
+				div.setAttribute("style", "position:relative;width:inherit;height:inherit;float:left;z-index:2;width:150px;margin-left:8px;margin-right:8px;");
+				var del = document.createElement("div"); //删除按钮div
+				del.setAttribute("style", "position: absolute; bottom: 4px; right: 0px; z-index: 99; width: 30px; height:30px;border-radius:50%;")
+				var delicon = document.createElement("img");
+				delicon.setAttribute("src", "http://www.jq22.com/tp/f26c324f-24db-4f08-91d6-f7ffc9ca1516.png");
+				delicon.setAttribute("title", "删除");
+				delicon.setAttribute("style", "cursor:pointer;width: 30px; height:30px");
+				del.onclick = function() {
+					this.parentNode.parentNode.removeChild(this.parentElement);
+					ClearfirtsImg();
+				};
+				del.appendChild(delicon);
+				div.appendChild(del);
+				var imgs = document.createElement("img"); //上传的图片
+				imgs.setAttribute("name", "loadimgs");
+				imgs.setAttribute("src", e.target.result);
+				imgs.setAttribute("width", 150);
+				if (document.getElementById(id).childNodes.length > 2) {
+					document.getElementById(id).removeChild(document.getElementById(id).firstChild);
+				}
+				div.appendChild(imgs)
+				document.getElementById(id).appendChild(div);
+			}
+			reader.readAsDataURL(file[i]);
+		}
+	}
+
+
+
+	function ClearfirtsImg() {
+		var file = $("#FirstfileImg")
+		file.after(file.clone().val(""));
+		file.remove();
+	}
+
+</script>
+<script th:line="javascript">
+		var awards;
+ 		$().ready(function(){
+			$.ajax({
+				type:"GET",	
+				url:"http://localhost:8080/Award/getallaward",
+				success(data){
+					awards=data;
+					setTimeout(() => {
+						var list=document.getElementById("awardtype");
+						for (var i=0;i<awards.length;i++){
+							$("#awardtype").append("<option value='Value'>"+awards[i].name+"</option>");  //为Select追加一个Option(下拉项)
+			//闭包
+}	
+			}, 1);
+				}
+			})
+			console.log(awards)
+			
+		});
+	var awards;
+	function getFormJson() {
+		var arry = $("#form").serializeArray(); //form的Id
+		var FormJson = {};//分配内存空间
+		for (var i = 0; i < arry.length; i++) {
+			FormJson[arry[i].name] = arry[i].value;
+		}
+		FormJson["accessoryid"] = accessoryid;
+		FormJson["img"] = img;
+		var data = JSON.stringify(FormJson)
+		console.log(FormJson)
+		$.ajax({
+			type: "POST",
+			contentType: "application/json;charset=UTF-8",
+			url: "http://localhost:8080/Project/addproject",
+			data: data,
+			dataType: "json",
+			success(res) {
+				alert(res)
+				location.href = "/"
+			}
+
+
+		})
+		alert("创建成功")
+		location.href = "user_index?id="+[[${id}]]
+	}
+
+	$(function() {
+
+			$.ajax({
+				type:"GET",
+				url:"/Award/getallaward",
+				success(res){
+					awards=res.data;
+				}
+			})
+			console.log(awards)
+
+　　});
+
+
+
+
+window.οnlοad=function(){
+	alert("s");
+
+
+	// function addmember(){
+	// 	$("#personinfo").append(" <div class="row">
+	// 	                                    <div class="col-sm-5 col-sm-offset-1">
+	// 	                                    	<div class="form-group">
+	// 	                                        	<label>成员姓名</label>
+	// 	                                        	<input type="text" class="form-control" name="phone" id="exampleInputEmail1" placeholder="enter name">
+	// 	                                    	</div>
+	// 	                                	</div>
+	// 	                                	<div class="col-sm-5">
+	// 	                                    	<div class="form-group">
+	// 	                                        	<label>成员电话</label>
+	// 	                                        	<div class="input-group">
+	// 	                                            	<input type="text" name="email" class="form-control" placeholder="enter phone">
+	// 	                                            	<span class="input-group-addon"></span>
+	// 	                                        	</div>
+	// 	                                    	</div>
+	// 										</div>
+	// 										<img style="position:relative; top:10px" src="./zfx/assets/img/add.png" alt="" onclick="addmember()">
+	// 	                                </div>  ");  //为Select追加一个Option(下拉项)
+	// }
+
+}
+</script>
+	<!--   Core JS Files   -->
+
+
+</html>

@@ -4,11 +4,16 @@ import com.july.demo.application.port.outbound.ProjectRepository;
 import com.july.demo.domain.Projects;
 import com.july.demo.domain.Jid;
 import com.july.demo.domain.Projects;
+import com.sun.tools.corba.se.idl.StringGen;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.List;
 
 public interface JpaProjectRepository extends ProjectRepository, JpaRepository<Projects, Jid> {
+
+    List<Projects> findByOwer(String ower);
+
+
 
     @Override
     default String deletebyid(Jid id){
@@ -37,6 +42,11 @@ public interface JpaProjectRepository extends ProjectRepository, JpaRepository<P
         project.setId(id);
         this.save(project);
         return id.getValue();
+    }
+
+    @Override
+    default List<Projects> findByower(String ower){
+        return this.findByOwer(ower);
     }
 
 

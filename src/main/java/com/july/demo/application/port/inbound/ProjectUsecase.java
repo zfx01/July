@@ -17,4 +17,10 @@ public interface ProjectUsecase {
     String add(Projects projects);
 
     String update(String id,Projects projects);
+
+    List<Projects> findByower(String ower);
+
+    String pass(String id,Projects projects);
+
+    String fail(String id,Projects projects);
 }

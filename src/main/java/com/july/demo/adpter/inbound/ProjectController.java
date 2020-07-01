@@ -28,12 +28,12 @@ public class ProjectController {
 
     @PostMapping("addproject")
     @ResponseBody
-    public String addProject(@RequestBody Projects project, HttpServletRequest request, @RequestParam("file") MultipartFile file){
-        String m1=request.getParameter("member1");
-        String m2=request.getParameter("member2");
-        String m3=request.getParameter("member3");
-        String m4=request.getParameter("member4");
-        project.setMember(new Member(m1,m2,m3,m4,project.getOwer()));
+    public String addProject(@RequestBody Projects project, HttpServletRequest request){
+//        String m1=request.getParameter("member1");
+//        String m2=request.getParameter("member2");
+//        String m3=request.getParameter("member3");
+//        String m4=request.getParameter("member4");
+//        project.setMember(new Member(m1,m2,m3,m4,project.getOwer()));
         return usecase.add(project);
     }
 
@@ -45,8 +45,8 @@ public class ProjectController {
 
     @DeleteMapping("deleteProjectbyid")
     @ResponseBody
-    public String deleteProjectbyid(String id){
-        return usecase.deleteByid(id);
+    public void deleteProjectbyid(@RequestParam String id) {
+        usecase.deleteByid(id);
     }
 
     @PutMapping("updateProjectbyid")
@@ -60,5 +60,16 @@ public class ProjectController {
     public String getproject(Model model,@RequestParam String id){
         model.addAttribute("obj",usecase.findByid(id));
         return "lzy/review";
+    }
+
+    @GetMapping("pass")
+    public String pass(@RequestParam String id,@RequestParam String id2){
+        usecase.pass(id,usecase.findByid(id));
+        return "admin_index/projects";
+    }
+    @GetMapping("fail")
+    public String fail(@RequestParam String id,Projects projects,@RequestParam String id2){
+        usecase.fail(id,usecase.findByid(id));
+        return "admin_index/projects";
     }
 }

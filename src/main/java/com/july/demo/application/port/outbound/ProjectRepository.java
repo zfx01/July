@@ -18,4 +18,7 @@ public interface ProjectRepository {
     Projects findbyid(Jid id);
 
     List<Projects> findall();
+
+    List<Projects> findByower(String ower);
+
 }

@@ -41,4 +41,20 @@ public class ProjectServices implements ProjectUsecase {
     public String update(String id, Projects projects) {
         return repository.updatebyid(new Jid().of(id),projects);
     }
+
+    @Override
+    public List<Projects> findByower(String ower) {
+        return repository.findByower(ower);
+    }
+
+    @Override
+    public String pass(String id,Projects projects) {
+        projects.setStatus("pass");
+        return repository.updatebyid(new Jid().of(id),projects);
+    }
+    @Override
+    public String fail(String id,Projects projects) {
+        projects.setStatus("fail");
+        return repository.updatebyid(new Jid().of(id),projects);
+    }
 }

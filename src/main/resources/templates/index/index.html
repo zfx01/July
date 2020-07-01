@@ -1,6 +1,6 @@
   <!DOCTYPE html>
-  <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">
-
+<!--  <html lang="en" xmlns:th="http://www.w3.org/1999/xhtml">-->
+  <html xmlns:th="http://www.thymeleaf.org">
 <head>
   <meta charset="utf-8">
   <meta content="width=device-width, initial-scale=1.0" name="viewport">
@@ -29,17 +29,23 @@
   <script>
 
     function intobacks(role,type,id) {
-      alert(id)
-      if(type==role){
-        if(role=="root"){
-          location.href="/back"
-        }
-        if ("expert"==role){
-          location.href="expert_index?id="+id
-        }
-      }
+      if(id==null)
+        alert("请先登陆")
       else {
-        alert("您没有权限")
+        alert(id)
+        if (type == role) {
+          if (role == "root") {
+            location.href = "/back"
+          }
+          if(role=="admin"){
+            location.href="admin_index?id="+id;
+          }
+          if ("expert" == role) {
+            location.href = "expert_index?id=" + id
+          }
+        } else {
+          alert("您没有权限")
+        }
       }
 
     }
@@ -105,11 +111,11 @@
         <div class="row no-gutters">
           <div class="content col-xl-5 d-flex align-items-stretch" data-aos="fade-up">
             <div class="content">
-              <h3>项目评审</h3>
+              <h3>项目审核</h3>
               <p>
                                   所有提交的项目必须经过管理员的审核后，方可进入初选。
               </p>
-              <a href="#" class="about-btn">进入 <i class="bx bx-chevron-right"></i></a>
+              <a href="javascript:;" th:onclick="intobacks([[${role}]],'admin',[[${id}]])" class="about-btn">进入 <i class="bx bx-chevron-right"></i></a>
             </div>
           </div>
           <div class="col-xl-7 d-flex align-items-stretch">
@@ -182,7 +188,7 @@
               <div class="icon"><i class="bx bx-world"></i></div>
               <h4 class="title"><a href="">第四步</a></h4>
               <p class="description">系统对申报资料依据基本情况、人员情况、建筑专业、经济指标、附件资料以及证明材料等方面进行分类管理等。</p>
-              <a href="#" class="about-btn">进入 <i class="bx bx-chevron-right"></i></a>
+              <a href="page?page=add_award" class="about-btn">进入 <i class="bx bx-chevron-right"></i></a>
             </div>
           </div>
 
@@ -217,7 +223,7 @@
               <p>
                                   会员单位负责人主要负责进行参选项目的申报，申报针对现有的某个建筑专业的特定奖项。
               </p>
-              <a href="" class="about-btn">进入 <i class="bx bx-chevron-right"></i></a>
+              <a th:href="@{'user_index?id='+${id}}"  class="about-btn">进入 <i class="bx bx-chevron-right"></i></a>
             </div>
           </div>
           <div class="col-xl-7 d-flex align-items-stretch">

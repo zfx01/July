@@ -23,7 +23,7 @@ public class Projects {
     String isfinish;
     String otherdetail;
     String img;
-    @OneToOne
-    Member member;
+    String member1,member2,member3,member4;
+    String status;
 
 }

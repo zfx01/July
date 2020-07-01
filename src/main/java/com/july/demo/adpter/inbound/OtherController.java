@@ -2,6 +2,7 @@ package com.july.demo.adpter.inbound;
 
 import com.july.demo.application.port.inbound.*;
 import com.july.demo.domain.*;
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.autoconfigure.web.servlet.ConditionalOnMissingFilterBean;
 import org.springframework.boot.web.servlet.server.Session;
@@ -54,6 +55,11 @@ public class OtherController {
     @Autowired
     NoticeUsecase notice;
 
+    @GetMapping("/")
+    public String indexs(){
+        return "index/index";
+    }
+
     @GetMapping("page")
     public String page(@RequestParam String page){
         return page;
@@ -101,7 +107,10 @@ public class OtherController {
             username=admins.getUsername();
             model.addAttribute("username",username);
             model.addAttribute("id",id);
-            model.addAttribute("role","root");
+            if(admins.getRights().equals("root"))
+                model.addAttribute("role","root");
+            if(admins.getRights().equals("admin"))
+                model.addAttribute("role","admin");
             session.setAttribute("username",username);
             session.setAttribute("id",id);
             if(!id.equals(""))
@@ -452,6 +461,35 @@ public class OtherController {
 //        }
 //        model.addAttribute("obj",obj);
 //    }
+
+    @GetMapping("user_index")
+    public String user_index(@RequestParam String id, Model model){
+        model.addAttribute("id",id);
+        model.addAttribute("datas",project.findByower(id));
+        return "projects";
+
+    }
+
+    @GetMapping("add_project")
+    public String add_project(){
+        return "add_project";
+    }
+
+    @GetMapping("admin_index")
+    public String admin_index(@RequestParam String id,Model model){
+        model.addAttribute("id",id);
+        model.addAttribute("datas",project.getall());
+        return "admin_index/projects";
+    }
+
+    @GetMapping("admin_review")
+    public String admin_review(@RequestParam String id,Model model){
+        model.addAttribute("id",id);
+        model.addAttribute("data",project.findByid(id));
+        return "admin_index/review";
+    }
+
+
 
 
 }
