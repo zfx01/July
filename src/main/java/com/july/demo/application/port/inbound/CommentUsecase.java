@@ -18,4 +18,6 @@ public interface CommentUsecase {
     String add(Comment comment, HttpServletRequest request);
 
     String update(String id,Comment comment);
+
+    List<Comment> getbyproject(String id);
 }

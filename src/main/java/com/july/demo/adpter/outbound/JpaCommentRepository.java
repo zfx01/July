@@ -9,6 +9,8 @@ import java.util.List;
 
 public interface JpaCommentRepository extends CommentRepository, JpaRepository<Comment, Jid> {
 
+    List<Comment> findByProjectid(String id);
+
     @Override
     default String deletebyid(Jid id){
         this.deleteById(id);
@@ -37,6 +39,13 @@ public interface JpaCommentRepository extends CommentRepository, JpaRepository<C
         this.save(comment);
         return id.getValue();
     }
+
+    @Override
+    default List<Comment> getbyproject(String id){
+        return findByProjectid(id);
+    }
+
+
 
 
 }

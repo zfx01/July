@@ -22,7 +22,7 @@ public class DeclarationController {
     }
 
     @PostMapping("adddeclaration")
-    public String addDeclaration(@RequestBody Declaration declaration,@RequestParam("file") MultipartFile file ){
+    public String addDeclaration(@RequestBody Declaration declaration ){
         return usecase.add(declaration);
     }
 
@@ -45,5 +45,6 @@ public class DeclarationController {
     public String getByGroup(String awardid){
         return null;
     }
+
 
 }

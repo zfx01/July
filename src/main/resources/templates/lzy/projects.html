@@ -80,13 +80,35 @@
 		    <div class="row portfolio-container" data-aos="fade-up">
 
 
+<!--				<li>-->
+<!--					<div th:each="data:${datas}">-->
+<!--						<div th:onclick="review(${data.id.value})" class="col-lg-4 col-md-6 portfolio-item filter-app">-->
+<!--							<input class="portfolio-wrap">-->
+<!--								<input value="${data.img}"></input>-->
+<!--&lt;!&ndash;								<img th:src="@{${data.img}}"  class="img-fluid" alt="图片">&ndash;&gt;-->
+<!--							</div>-->
+<!--						</div>-->
+<!--			</div>-->
+
+				</li>
+
+
 				<li>
 					<div th:each="data:${datas}">
-						<div th:onclick="review([[${data.id.value}]])" class="col-lg-4 col-md-6 portfolio-item filter-app">
+						<div th:onclick="review([[${data.id.value}]])" class="col-lg-4 col-md-6 portfolio-item filter-card">
 							<div class="portfolio-wrap">
-								<img th:src="${data.img}"  class="img-fluid" >
+								<img th:src="${data.img}" class="img-fluid" alt="">
+								<div class="portfolio-links">
+									<!--									<a href="lzy/assets/img/portfolio/portfolio-7.jpg" data-gall="portfolioGallery" class="venobox" title="Card 1"><i class="bx bx-plus"></i></a>-->
+									<a href="javascript:;" th:onclick="deletepro([[${data.id.value}]],[[${id}]])" title="More Details"><i class="bx bx-link"></i></a>
+								</div>
 							</div>
 						</div>
+						<!--						<div th:onclick="review([[${data.id.value}]])" class="col-lg-4 col-md-6 portfolio-item filter-app">-->
+						<!--							<div class="portfolio-wrap">-->
+						<!--								<img th:src="${data.img}"  class="img-fluid" >-->
+						<!--							</div>-->
+						<!--						</div>-->
 					</div>
 				</li>
 
@@ -135,6 +157,12 @@
 		// window.location.href="review?id="+id
 		// location.href="review?id="+id
 		$(location).attr('href', "review?id="+id);
+	}
+	function test(datas) {
+		if (datas.size()>0)
+			return true;
+		else
+			return false;
 	}
 
 </script>

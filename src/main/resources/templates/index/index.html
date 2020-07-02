@@ -32,7 +32,6 @@
       if(id==null)
         alert("请先登陆")
       else {
-        alert(id)
         if (type == role) {
           if (role == "root") {
             location.href = "/back"
@@ -188,7 +187,7 @@
               <div class="icon"><i class="bx bx-world"></i></div>
               <h4 class="title"><a href="">第四步</a></h4>
               <p class="description">系统对申报资料依据基本情况、人员情况、建筑专业、经济指标、附件资料以及证明材料等方面进行分类管理等。</p>
-              <a href="page?page=add_award" class="about-btn">进入 <i class="bx bx-chevron-right"></i></a>
+              <a th:href="@{'add_award?id='+${id}}" class="about-btn">进入 <i class="bx bx-chevron-right"></i></a>
             </div>
           </div>
 

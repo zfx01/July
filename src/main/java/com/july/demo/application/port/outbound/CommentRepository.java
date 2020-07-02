@@ -20,4 +20,6 @@ public interface CommentRepository {
     Comment findbyid(Jid id);
 
     List<Comment> findall();
+
+    List<Comment> getbyproject(String id);
 }

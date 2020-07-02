@@ -92,17 +92,17 @@
 
 	function update(fyID) {
 		if(fyID!=null){
-		$.ajax({
-			url:"/sessionid?id="+fyID,
-			type:"GET",
-			success(res) {
-				// window.location.href="getpage?page=admin_edit"
-
-			}
-		})
-			$(location).attr('href', "getpage?page=admin_edit");
+		// $.ajax({
+		// 	url:"/sessionid?id="+fyID,
+		// 	type:"GET",
+		// 	success(res) {
+		// 		// window.location.href="getpage?page=admin_edit"
+		//
+		// 	}
+		// })
+			$(location).attr('href', "edit?type=admin&id="+fyID);
 		}else {
-			$(location).attr('href', "getpage?page=admin_edit");
+			$(location).attr('href', "edit?type=admin&id="+fyID);
 		}
 	}
 	
@@ -221,8 +221,8 @@
 							<!--						<td><input type="checkbox" name="IDCheck" value="14458579642011" class="acb" /></td>-->
 							<td th:text="${data.id.value}"></td>
 							<td th:text="${data.username}"></td>
-							<th th:text="${data.password}"></th>
-							<th th:text="${data.rights}"></th>
+							<td th:text="${data.password}"></td>
+							<td th:text="${data.rights}"></td>
 							<td>
 								<a th:onclick="update([[${data.id.value}]])" class="edit">编辑</a>
 								<a th:onclick="del([[${data.id.value}]])">删除</a>

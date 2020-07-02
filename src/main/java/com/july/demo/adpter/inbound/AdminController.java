@@ -36,7 +36,10 @@ public class AdminController {
     }
 
     @PutMapping("updateAdminbyid")
-    public String updateAdminbyid(String id,Admin admin){
+    public String updateAdminbyid(@RequestParam  String id,@RequestBody Admin admin){
         return usecase.update(id,admin);
     }
+
+
+
 }

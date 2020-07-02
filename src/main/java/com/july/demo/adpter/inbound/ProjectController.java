@@ -72,4 +72,11 @@ public class ProjectController {
         usecase.fail(id,usecase.findByid(id));
         return "admin_index/projects";
     }
+
+    @GetMapping("findbyower")
+    @ResponseBody
+    public List<Projects> findbyower(@RequestParam String id) {
+        return usecase.findByower(id);
+    }
+
 }

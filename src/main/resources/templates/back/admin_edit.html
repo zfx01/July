@@ -10,6 +10,7 @@
 <script type="text/javascript" src="scripts/jquery/jquery-1.4.4.min.js"></script>
 <script src="scripts/My97DatePicker/WdatePicker.js" type="text/javascript" defer="defer"></script>
 <script type="text/javascript" src="scripts/artDialog/artDialog.js?skin=default"></script>
+
 <script type="text/javascript" th:inline="javascript" >
 	// var url=location.search
 	// var theRequest = new Object();
@@ -21,14 +22,14 @@
 	// 	}
 	// 	console.log( theRequest ); //此时的theRequest就是我们需要的参数
 	$(function () {
-		var id=[[${session.id}]]
-		// var id="${session.userName}"
-		// var id= "<%=session.getAttribute('id')%>"
-
-		alert(id)
-		URL:"edit?type=admin&id="+id;
-		var obj=[[${session.obj}]]
-		alert(obj)
+		// var id=[[${session.id}]]
+		// // var id="${session.userName}"
+		// // var id= "<%=session.getAttribute('id')%>"
+		//
+		// alert(id)
+		// URL:"edit?type=admin&id="+id;
+		// var obj=[[${session.obj}]]
+		// alert(obj)
 
 		// if([[${id}]]!=null){
 		//
@@ -53,23 +54,7 @@
 		/*
 		 * 提交
 		 */
-		$("#submitbutton").click(function() {
-			if(validateForm()){
-				$.ajax({
-					url:"Admin/addadmin",
-					type:"POST",
-					dataType: "json",
-					data:JSON.stringify($('form').serializeObject()),
-					// contentType:"application/json",  //缺失会出现URL编码，无法转成json对象
-					contentType: "application/json; charset=utf-8",
-					success:function(){
-						alert("成功");
 
-					}
-
-				})
-			}
-		});
 		
 		/*
 		 * 取消
@@ -205,30 +190,31 @@
 					<td class="ui_text_rt">用户名</td>
 					<td class="ui_text_lt">
 						<div th:if="${obj}!=null"><input type="text" id="fyJizuMj" th:value="${obj.username}" name="username" value="" class="ui_input_txt02"/></div>
-						<input type="text" id="a"  name="username" value="" class="ui_input_txt02"/>
+						<div th:if="${obj}==null"><input type="text" id="a"  name="username" value="" class="ui_input_txt02"/></div>
 					</td>
 				</tr>
 				<tr>
 					<td class="ui_text_rt">密码</td>
 					<td class="ui_text_lt">
 						<div th:if="${obj}!=null"><input type="text" id="fyZongMj" th:value="${obj.password}" name="password" value="" class="ui_input_txt02"/></div>
-						<input type="text" id="fj"  name="password" value="" class="ui_input_txt02"/>
+						<div th:if="${obj}==null"><input type="text" id="fj"  name="password" value="" class="ui_input_txt02"/></div>
 					</td>
 				</tr>
 				<tr>
 					<td  class="ui_text_rt">权限</td>
 					<td class="ui_text_lt">
 						<div th:if="${obj}!=null"><input type="text" id="fyFh" th:value="${obj.rights}" name="rights" value="" class="ui_input_txt02"/></div>
-						<input type="text" id="f" name="rights" value="" class="ui_input_txt02"/>
+						<div th:if="${obj}==null"><input type="text" id="f" name="rights" value="" class="ui_input_txt02"/></div>
 					</td>
 				</tr>
 				
 				
-				<tr>
+				<tr>s
 					<td>&nbsp;</td>
 					<td class="ui_text_lt">
-						&nbsp;<input id="submitbutton" type="button" value="提交" class="ui_input_btn01"/>
-						&nbsp;<input id="cancelbutton" type="button" value="取消" class="ui_input_btn01"/>
+<!--                        <input id="submitbutton" th:onclick="abc([[${obj.id.value}]])" type="button" value="sub" class="ui_input_btn01"/>-->
+						&nbsp;<input id="submitbutton" th:onclick="abc([[${obj.id.value}]])" type="button" value="提交" class="ui_input_btn01"/>
+						&nbsp;<input id="cancelbutton" type="button" onclick="canc()"  value="取消" class="ui_input_btn01"/>
 					</td>
 				</tr>
 			</table>
@@ -237,4 +223,48 @@
 </form>
 <div style="display:none"><script src='http://v7.cnzz.com/stat.php?id=155540&web_id=155540' language='JavaScript' charset='gb2312'></script></div>
 </body>
+<script th:inline="javascript">
+    function abc(id){
+        if([[${obj}]]==null){
+            if(validateForm()){
+                $.ajax({
+                    url:"Admin/addadmin",
+                    type:"POST",
+                    dataType: "json",
+                    data:JSON.stringify($('form').serializeObject()),
+                    // contentType:"application/json",  //缺失会出现URL编码，无法转成json对象
+                    contentType: "application/json; charset=utf-8",
+                    success:function(){
+                        alert("成功");
+
+                    }
+
+                })
+            }}
+        else {
+            if(validateForm()){
+                $.ajax({
+                    url:"Admin/updateAdminbyid?id="+id,
+                    type:"PUT",
+                    dataType: "json",
+                    data:JSON.stringify($('form').serializeObject()),
+                    // contentType:"application/json",  //缺失会出现URL编码，无法转成json对象
+                    contentType: "application/json; charset=utf-8",
+                    success:function(){
+                        alert("成功");
+                        window.history.back(-1);
+
+                    }
+
+                })
+            }
+        }
+    };
+</script>
+
+<script>
+    function canc() {
+        window.history.back(-1);
+    }
+</script>
 </html>

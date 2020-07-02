@@ -49,4 +49,10 @@ public class CommentServices implements CommentUsecase {
     public String update(String id, Comment comment) {
         return repository.updatebyid(new Jid().of(id),comment);
     }
+
+    @Override
+    public List<Comment> getbyproject(String id) {
+
+        return repository.getbyproject(id);
+    }
 }

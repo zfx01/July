@@ -11,7 +11,9 @@ import java.util.List;
 
 public interface JpaProjectRepository extends ProjectRepository, JpaRepository<Projects, Jid> {
 
-    List<Projects> findByOwer(String ower);
+    List<Projects> findByOwerAndStatus(String ower,String status);
+    Projects findByIdAndStatus(Jid id,String status);
+    List<Projects> findByOwer(String id);
 
 
 
@@ -38,6 +40,11 @@ public interface JpaProjectRepository extends ProjectRepository, JpaRepository<P
     }
 
     @Override
+    default Projects findbyidandstatus(Jid id,String status){
+        return this.findByIdAndStatus(id,status);
+    }
+
+    @Override
     default String updatebyid(Jid id,Projects project){
         project.setId(id);
         this.save(project);
@@ -48,6 +55,7 @@ public interface JpaProjectRepository extends ProjectRepository, JpaRepository<P
     default List<Projects> findByower(String ower){
         return this.findByOwer(ower);
     }
+
 
 
 }

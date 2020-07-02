@@ -23,4 +23,6 @@ public interface ProjectUsecase {
     String pass(String id,Projects projects);
 
     String fail(String id,Projects projects);
+
+    Projects findByidandstatus(String id,String status);
 }

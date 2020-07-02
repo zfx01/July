@@ -19,4 +19,5 @@ public interface DeclarationUsecase {
     String update(String id,Declaration declartion);
 
     List<Declaration> findByawardid(String awardid);
+
 }

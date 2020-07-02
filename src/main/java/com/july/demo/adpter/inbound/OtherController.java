@@ -18,6 +18,7 @@ import javax.servlet.http.HttpSession;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Map;
 
 @Controller
 @CrossOrigin("*")
@@ -76,6 +77,8 @@ public class OtherController {
     public String register_page(){
         return "registration";
     }
+
+
 
     @PostMapping("register")
     public String register(@RequestParam String username,@RequestParam String password,@RequestParam String email,@RequestParam String phone){
@@ -252,6 +255,7 @@ public class OtherController {
             String fileName = System.currentTimeMillis() + file.getOriginalFilename();
             //3.通过req.getServletContext().getRealPath("") 获取当前项目的真实路径，然后拼接前面的文件名
             destFileName= req.getServletContext().getRealPath("") + "uploaded" + File.separator + fileName;
+            destFileName= destFileName.split("static")[1];
             //4.第一次运行的时候，这个文件所在的目录往往是不存在的，这里需要创建一下目录（创建到了webapp下uploaded文件夹下）
             File destFile = new File(destFileName);
             destFile.getParentFile().mkdirs();
@@ -345,7 +349,7 @@ public class OtherController {
 
     @GetMapping("edit")
     public String edit(@RequestParam String type,String id,Model model,HttpServletRequest request){
-        if(id!=null){
+        if(!id.equals("null")){
         Object obj=null;
         switch (type){
             case "user":
@@ -382,8 +386,12 @@ public class OtherController {
         model.addAttribute("obj",obj);
         request.setAttribute("obj",obj);
         model.addAttribute("id",id);
+            return "back/"+type+"_edit";
         }
 
+        model.addAttribute("obj",null);
+        request.setAttribute("obj",null);
+        model.addAttribute("id",id);
         return "back/"+type+"_edit";
 
     }
@@ -409,7 +417,7 @@ public class OtherController {
         }
 
         model.addAttribute("datas",list2);
-        return "lzy/projects";
+            return "lzy/projects";
     }
 
     @GetMapping("review")
@@ -488,6 +496,58 @@ public class OtherController {
         model.addAttribute("data",project.findByid(id));
         return "admin_index/review";
     }
+
+    @GetMapping("add_award")
+    public String award(@RequestParam String id,Model model){
+        model.addAttribute("id",id);
+        return "add_award";
+    }
+
+
+    @GetMapping("getvotedata")
+    @ResponseBody
+    public List getvotedata(String id){
+
+        List<Declaration> list=declaration.findByawardid(id);
+        List<Comment> list1 = null;
+        List<Integer> votes=new ArrayList<Integer>();
+        for(int i=0;i<list.size();i++){
+            int sum=0;
+            list1=comment.getbyproject(list.get(i).getProjectid());
+            for (int j=0;j<list1.size();j++){
+                try {
+                    sum=sum+Integer.valueOf(list1.get(j).getVote());
+                }catch (Exception e){}
+
+            }
+            votes.add(sum);
+
+        }
+
+        return votes;
+
+    }
+
+
+    @GetMapping("findByawardid")
+    @ResponseBody
+    public  List<String> findByawardid(@RequestParam String id){
+        List<Declaration> list= declaration.findByawardid(id);
+        List<String> name=new ArrayList<String>();
+        for (int i=0;i<list.size();i++){
+            String id1= list.get(i).getProjectid();
+            project.findByid(id1);
+            name.add(project.findByid(list.get(i).getProjectid()).getName());
+        }
+        return name;
+    }
+
+    @GetMapping("chars")
+    public String chars(){
+        return "back/chars";
+    }
+
+
 
 
 

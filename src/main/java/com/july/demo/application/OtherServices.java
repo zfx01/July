@@ -3,10 +3,13 @@ package com.july.demo.application;
 import com.july.demo.adpter.outbound.JpaUserRepository;
 import com.july.demo.application.port.inbound.OtherControllerUsecase;
 import com.july.demo.application.port.outbound.UserRepository;
+import com.july.demo.domain.Comment;
 import com.july.demo.domain.User;
 import com.july.demo.other.EmailSender;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
+
+import java.util.List;
 
 @Component
 public class OtherServices implements OtherControllerUsecase {
@@ -41,4 +44,5 @@ public class OtherServices implements OtherControllerUsecase {
     public String changepassword(String email,String password){
         return rep.changepassword(email,password);
     }
+
 }

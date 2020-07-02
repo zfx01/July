@@ -57,4 +57,11 @@ public class ProjectServices implements ProjectUsecase {
         projects.setStatus("fail");
         return repository.updatebyid(new Jid().of(id),projects);
     }
+
+    @Override
+    public Projects findByidandstatus(String id, String status) {
+        return repository.findbyidandstatus(new Jid().of(id),"pass");
+    }
+
+
 }
