@@ -65,12 +65,12 @@ public class ProjectController {
     @GetMapping("pass")
     public String pass(@RequestParam String id,@RequestParam String id2){
         usecase.pass(id,usecase.findByid(id));
-        return "admin_index/projects";
+        return "admin_index/projects?id="+id2;
     }
     @GetMapping("fail")
     public String fail(@RequestParam String id,Projects projects,@RequestParam String id2){
         usecase.fail(id,usecase.findByid(id));
-        return "admin_index/projects";
+        return "admin_index/projects?id="+id2;
     }
 
     @GetMapping("findbyower")

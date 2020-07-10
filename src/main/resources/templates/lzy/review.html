@@ -124,16 +124,9 @@
                  <div class="validate"></div>
                </div>
                <div class="form-group">
-                 <textarea onblur="ok()" class="form-control" name="info" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
+                 <textarea th:onblur="ok([[${session.id}]])" class="form-control" name="info" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>
                  <div class="validate"></div>
                </div>
-<!--               <div class="mb-3">-->
-<!--                 <div class="loading">Loading</div>-->
-<!--                 <div class="error-message"></div>-->
-<!--                 <div class="sent-message">Your message has been sent. Thank you!</div>-->
-<!--               </div>-->
-<!--               <div class="text-center"></div>-->
-<!--				 <button onclick="ok()"></button>-->
              </form>
            </div>
          
@@ -200,7 +193,7 @@
 	}
 
 
-	function ok(){
+	function ok(id){
 		alert("评分成功")
 		// $.ajax({
 		// 	url:"test"
@@ -217,6 +210,7 @@
 
 			}
 		});
+		location.href = "expert_index?id="+id
 	}
 
 

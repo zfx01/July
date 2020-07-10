@@ -396,6 +396,11 @@ public class OtherController {
 
     }
 
+    @GetMapping("add")
+    public String add(@RequestParam String type,Model model,HttpServletRequest request){
+        return "back/"+type+"_add";
+    }
+
     @GetMapping("getedit")
     public  String getedit(){
         return "back/admin_edit";
@@ -548,7 +553,13 @@ public class OtherController {
     }
 
 
-
+    @GetMapping("findbyid")
+    public String findbyid(@RequestParam  String id, Model model){
+        List<Admin> list=new ArrayList<Admin>();
+        list.add(admin.findByid(id));
+        model.addAttribute("datas",list);
+        return "back/admin1";
+    }
 
 
 

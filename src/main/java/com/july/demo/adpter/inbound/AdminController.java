@@ -3,8 +3,10 @@ package com.july.demo.adpter.inbound;
 import com.july.demo.application.port.inbound.AdminUsecase;
 import com.july.demo.domain.Admin;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RestController
@@ -26,7 +28,7 @@ public class AdminController {
     }
 
     @GetMapping("getAdminbyid")
-    public Admin findByid(String id){
+    public Admin findByid(@RequestParam  String id){
         return usecase.findByid(id);
     }
 
@@ -39,6 +41,7 @@ public class AdminController {
     public String updateAdminbyid(@RequestParam  String id,@RequestBody Admin admin){
         return usecase.update(id,admin);
     }
+
 
 
 

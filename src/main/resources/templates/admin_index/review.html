@@ -127,8 +127,8 @@
                </div>
                <div class="form-group">
 <!--                 <textarea onblur="ok()" class="form-control" name="info" rows="5" data-rule="required" data-msg="Please write something for us" placeholder="Message"></textarea>-->
-                 <a th:href="@{'Project/pass?id='+${data.id.value}+'&id2='+${id}}">通过</a>
-				   <a th:href="@{'Project/fail?id='+${data.id.value}+'&id2='+${id}}">不通过</a>
+                 <a th:href="@{'Project/pass?id='+${data.id.value}+'&id2='+${session.id}}">通过</a>
+				   <a th:href="@{'Project/fail?id='+${data.id.value}+'&id2='+${session.id}}">不通过</a>
 
 				   <div class="validate"></div>
                </div>

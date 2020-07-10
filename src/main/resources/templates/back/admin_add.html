@@ -189,22 +189,22 @@
 				<tr>
 					<td class="ui_text_rt">用户名</td>
 					<td class="ui_text_lt">
-						<div th:if="${obj}!=null"><input type="text" id="fyJizuMj" th:value="${obj.username}" name="username" value="" class="ui_input_txt02"/></div>
-						<div th:if="${obj}==null"><input type="text" id="a"  name="username" value="" class="ui_input_txt02"/></div>
+
+						<div ><input type="text" id="a"  name="username" value="" class="ui_input_txt02"/></div>
 					</td>
 				</tr>
 				<tr>
 					<td class="ui_text_rt">密码</td>
 					<td class="ui_text_lt">
-						<div th:if="${obj}!=null"><input type="text" id="fyZongMj" th:value="${obj.password}" name="password" value="" class="ui_input_txt02"/></div>
-						<div th:if="${obj}==null"><input type="text" id="fj"  name="password" value="" class="ui_input_txt02"/></div>
+
+						<div ><input type="text" id="fj"  name="password" value="" class="ui_input_txt02"/></div>
 					</td>
 				</tr>
 				<tr>
 					<td  class="ui_text_rt">权限</td>
 					<td class="ui_text_lt">
-						<div th:if="${obj}!=null"><input type="text" id="fyFh" th:value="${obj.rights}" name="rights" value="" class="ui_input_txt02"/></div>
-						<div th:if="${obj}==null"><input type="text" id="f" name="rights" value="" class="ui_input_txt02"/></div>
+
+						<div ><input type="text" id="f" name="rights" value="" class="ui_input_txt02"/></div>
 					</td>
 				</tr>
 				
@@ -212,7 +212,7 @@
 				<tr>s
 					<td>&nbsp;</td>
 					<td class="ui_text_lt">
-<!--                        <input id="submitbutton" th:onclick="abc([[${obj.id.value}]])" type="button" value="sub" class="ui_input_btn01"/>-->
+						<input id="sub" th:onclick="abc([[${obj.id.value}]])" > sunmit</input>
 						&nbsp;<input id="submitbutton" th:onclick="abc([[${obj.id.value}]])" type="button" value="提交" class="ui_input_btn01"/>
 						&nbsp;<input id="cancelbutton" type="button" onclick="canc()"  value="取消" class="ui_input_btn01"/>
 					</td>
@@ -225,13 +225,13 @@
 </body>
 <script th:inline="javascript">
     function abc(id){
-        if([[${obj}]]==null){
+        if(true){
             if(validateForm()){
                 $.ajax({
                     url:"Admin/addadmin",
                     type:"POST",
                     dataType: "json",
-                    data:JSON.stringify($('form').serializeObject()),
+                    data:JSON	.stringify($('form').serializeObject()),
                     // contentType:"application/json",  //缺失会出现URL编码，无法转成json对象
                     contentType: "application/json; charset=utf-8",
                     success:function(){
@@ -240,8 +240,6 @@
                     }
 
                 })
-				alert("修改成功")
-				location.href="getpage?page=admin"
             }}
         else {
             if(validateForm()){
@@ -259,13 +257,9 @@
                     }
 
                 })
-				alert("修改成功")
-				location.href="getpage?page=admin"
             }
         }
     };
-
-
 </script>
 
 <script>
